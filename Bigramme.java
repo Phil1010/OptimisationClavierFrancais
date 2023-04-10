@@ -1,48 +1,42 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Bigramme {
 
-    int[][] bigramMatrix;
+    private String [] bigramme;
+    private ArrayList<String> tab;
 
-    public Bigramme() {
-        this.bigramMatrix = new int[26][26];
-        this.bigramMatrix = this.parse(freqBigrammes.txt, " ");
-
+    public Bigramme(){
+        this.bigramme=new String[0];
+        this.tab = new ArrayList<>();
     }
-    
-    public static int[][] parse(String filename, String delimiter) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filename));
-        String line;
-        int rowCount = 0;
-        int colCount = 0;
 
-        // count rows and columns
-        while ((line = reader.readLine()) != null) {
-            rowCount++;
-            String[] values = line.split(delimiter);
-            colCount = Math.max(colCount, values.length - 1);
-        }
+    public String[] parse(String filename, String delimiter) throws IOException {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(filename));
+            String line;
 
-        // initialize matrix
-        int[][] matrix = new int[rowCount][colCount];
+            while ((line = reader.readLine()) != null) {
+                this.bigramme = line.split(delimiter);
+                this.tab.add(Arrays.toString(bigramme));
 
-        // fill matrix with values
-        reader = new BufferedReader(new FileReader(filename));
-        int row = 0;
-        while ((line = reader.readLine()) != null) {
-            String[] values = line.split(delimiter);
-            for (int col = 1; col < values.length; col++) {
-                matrix[row][col - 1] = Integer.parseInt(values[col]);
             }
-            row++;
+            return bigramme;
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
         }
-
-        return matrix;
     }
-    
-    /*public Bigramme() {
+
+    public ArrayList<String> getTab() {
+        return tab;
+    }
+/*public Bigramme() {
         this.bigramMatrix = new int[26][26];
         bigramMatrix[0][0] = 31;
         bigramMatrix[0][1] = 242;
