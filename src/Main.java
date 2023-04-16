@@ -11,6 +11,14 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        if(args.length == 0){
+            System.out.println("Aucun fichier fourni ! Abandon...");
+            System.exit(0);
+        }
+        String filename = args[0];
+
+
+
         System.out.println(" -> Calcul de la meilleure disposition du clavier à partir de dispositions aléatoires ...");
 
         Thread t = new Thread(new ConsoleHelper());
@@ -20,7 +28,8 @@ public class Main {
         double seuil = 0.00001F;          // Seuil de température à partir duquel nous supposerons qu'il n'y a plus de meilleure solution.
         double lambda = 0.9999F;         // Paramètre de décroissance de la fonction températue à chaque itération.
         double tau0 = 0.50F;            // Seuil de confiance dans le calcul de la température initiale.
-        init(tau0);
+
+        init(tau0, filename);
 
 
         // Traitement.
@@ -36,10 +45,10 @@ public class Main {
     }
 
 
-    public static void init(double tau0) throws IOException {
+    public static void init(double tau0, String filename) throws IOException {
         // -> Génération du tableau de bigrammes
         Bigramme occurencesBigrammes = new Bigramme();
-        occurencesBigrammes.parse("ressources/freqBigrammes.txt");
+        occurencesBigrammes.parse(filename);
 
         rs = new RecuitSimule(occurencesBigrammes);
 
