@@ -4,7 +4,7 @@ public class DispositionClavier {
 
 
 
-    private final char[][] disposition;
+    private char[][] disposition;
     private final Alphabet alphabet;
 
     public DispositionClavier(){
@@ -12,6 +12,20 @@ public class DispositionClavier {
         this.alphabet = new Alphabet();
     }
 
+    public DispositionClavier(DispositionClavier dispositionClavier) {
+        this.disposition = new char[4][10];
+        int i = 0, j = 0;
+        while(i<4){
+            while(j<10){
+                this.disposition[i][j] = dispositionClavier.getDisposition()[i][j];
+                j++;
+            }
+            j=0; i++;
+        }
+
+
+        this.alphabet = new Alphabet();
+    }
 
     public void generateRandomDisposition(){
         int nbLetters = 26;
@@ -29,6 +43,27 @@ public class DispositionClavier {
         }
     }
 
+    public void generateFixedDisposition(){
+        char[][] disp = new char[4][10];
+        disp[0] = new char[] {'A', '*', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'};
+        disp[1] = new char[] {'Q', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M'};
+        disp[2] = new char[] {'W', 'X', 'C', 'V', 'B', 'N', '*', '*', '*', '*'};
+        disp[3] = new char[] {'*', '*', '*', '*', '*', '*', '*', 'Z', '*', '*'};
+
+
+        this.disposition = disp;
+    }
+    public void generateFixedDisposition250(){
+        char[][] disp = new char[4][10];
+        disp[0] = new char[] {'*', '*', 'H', 'N', 'Y', '*', '*', 'E', 'U', '*'};
+        disp[1] = new char[] {'C', 'M', 'P', 'J', 'K', '*', 'L', 'S', '*', '*'};
+        disp[2] = new char[] {'*', 'V', 'W', 'Q', 'Z', 'X', 'A', 'O', 'D', 'T'};
+        disp[3] = new char[] {'*', 'B', 'G', 'F', 'I', 'R', '*', '*', '*', '*'};
+
+
+        this.disposition = disp;
+    }
+
     public void printDisposition(){
         for(int i = 0; i<4; i++){
             for(int j = 0; j<10; j++){
@@ -42,11 +77,15 @@ public class DispositionClavier {
         for(int i = 0; i<4; i++){
             for(int j = 0; j<10; j++){
                 if(this.disposition[i][j] == letter){
-                    return new int[]{i+1,j+1};
+                    return new int[]{i,j};
                 }
             }
         }
         return null;
+    }
+
+    public char getLetter(int x, int y){
+        return this.disposition[x][y];
     }
 
     public int manhattanDistance(Character letter1, Character letter2){

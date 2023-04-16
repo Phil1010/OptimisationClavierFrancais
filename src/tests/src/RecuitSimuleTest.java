@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class RecuitSimuleTest {
 
 
@@ -22,7 +20,7 @@ class RecuitSimuleTest {
         }
 
         RecuitSimule rs = new RecuitSimule(b);
-        float score = rs.targetFunction(dc);
+        double score = rs.targetFunction(dc);
         System.out.println("Score : " + score);
     }
 
@@ -45,7 +43,7 @@ class RecuitSimuleTest {
             i++;
         }
 
-        float t0 = rs.computeT0(0.50F, ldc);
+        double t0 = rs.computeT0(0.50F, ldc);
         System.out.println("T0 = " + t0);
 
     }

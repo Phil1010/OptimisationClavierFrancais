@@ -10,15 +10,15 @@ public class RecuitSimule {
         this.bigramme = b;
     }
 
-    private float distanceAndWeigth(char lettre1, char lettre2, DispositionClavier dispositionClavier){
+    private double distanceAndWeigth(char lettre1, char lettre2, DispositionClavier dispositionClavier){
         int nbOccuLettre1Lettre2 = this.bigramme.getOccurr(lettre1, lettre2);
         int nbOccuLettre2Lettre1 = this.bigramme.getOccurr(lettre2, lettre1);
-        return (float) (dispositionClavier.manhattanDistance(lettre1,lettre2)/(nbOccuLettre2Lettre1+nbOccuLettre1Lettre2+1));
+        return (double) dispositionClavier.manhattanDistance(lettre1, lettre2) / (nbOccuLettre2Lettre1 + nbOccuLettre1Lettre2 +1);
     }
 
-    public float targetFunction(DispositionClavier dc){
+    public double targetFunction(DispositionClavier dc){
 
-        float score = 0;
+        double score = 0;
         char[][] array = dc.getDisposition();
         int i = 0,j = 0;
         int k = 0,l = 0;
@@ -29,7 +29,8 @@ public class RecuitSimule {
                     while (k < 4) {
                         while (l < 10) {
                             if (array[k][l] != this.alphabet.emptyLetter) {
-                                // System.out.print("Computing " + array[i][j] + " - " + array[k][l] + '\n');
+                                //System.out.print("Computing " + array[i][j] + " - " + array[k][l] + '\n');
+                                //System.out.println("Result : " +  this.distanceAndWeigth(array[k][l], array[i][j], dc));
                                 score += this.distanceAndWeigth(array[k][l], array[i][j], dc);
                             } l++;
                         } l = 0; k++;
@@ -42,9 +43,9 @@ public class RecuitSimule {
     }
 
 
-    public float computeT0(float tau0, ListeDispositionClavier ldc){
+    public double computeT0(double tau0, ListeDispositionClavier ldc){
         // Moyenne des variations de DeltaE
-        float moy = 0;
+        double moy = 0;
         int i = 0;
         while(i<ldc.getListe().size()-1){
             moy += Math.abs(targetFunction(ldc.getListe().get(i)) - targetFunction(ldc.getListe().get(i+1)));
@@ -53,10 +54,10 @@ public class RecuitSimule {
         moy = moy/ldc.getListe().size();
 
         // Calcul de T0
-        return (float) (-moy/Math.log(tau0));
+        return -moy/Math.log(tau0);
     }
 
-    public float temperatureVariation(float ti, float lambda){
+    public double temperatureVariation(double ti, double lambda){
         return lambda*ti;
     }
 
