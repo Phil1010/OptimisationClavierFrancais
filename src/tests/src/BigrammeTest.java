@@ -11,7 +11,7 @@ class BigrammeTest {
         Bigramme bigramme = new Bigramme();
 
         try {
-            bigramme.parse("freqBigrammes.txt");
+            bigramme.parse("ressources/freqBigrammes.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -23,7 +23,7 @@ class BigrammeTest {
     void getOccurr() {
         Bigramme bigramme = new Bigramme();
         try {
-            bigramme.parse("freqBigrammes.txt");
+            bigramme.parse("ressources/freqBigrammes.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

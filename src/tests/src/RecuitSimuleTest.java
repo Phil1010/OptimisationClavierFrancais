@@ -14,7 +14,7 @@ class RecuitSimuleTest {
         dc.printDisposition();
         Bigramme b = new Bigramme();
         try {
-            b.parse("freqBigrammes.txt");
+            b.parse("ressources/freqBigrammes.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -28,7 +28,7 @@ class RecuitSimuleTest {
     void computeT0() {
         Bigramme b = new Bigramme();
         try {
-            b.parse("freqBigrammes.txt");
+            b.parse("ressources/freqBigrammes.txt");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
