@@ -10,6 +10,12 @@ public class RecuitSimule {
         this.bigramme = b;
     }
 
+    private float distanceAndWeigth(char lettre1, char lettre2, DispositionClavier dispositionClavier){
+        int nbOccuLettre1Lettre2 = this.bigramme.getOccurr(lettre1, lettre2);
+        int nbOccuLettre2Lettre1 = this.bigramme.getOccurr(lettre2, lettre1);
+        return (float) (dispositionClavier.manhattanDistance(lettre1,lettre2)/(nbOccuLettre2Lettre1+nbOccuLettre1Lettre2+1));
+    }
+
     public float targetFunction(DispositionClavier dc){
 
         float score = 0;
