@@ -102,5 +102,32 @@ public class DispositionClavier {
         return disposition;
     }
 
+    public DispositionClavier mixDispositionClavier(){
+        boolean good = false;
+        DispositionClavier result = new DispositionClavier(this);
+
+        while(!good) {
+            // Choix de deux lettres aléatoires.
+            int i = (int) Math.floor(Math.random() * (4));      // Abscisse lettre 1
+            int j = (int) Math.floor(Math.random() * (10));     // Ordonnée lettre 1
+
+            int k = (int) Math.floor(Math.random() * (4));      // Abscisse lettre 2
+            int l = (int) Math.floor(Math.random() * (10));     // Ordonnée lettre 2
+
+            //System.out.println("//---------------------//");
+            //System.out.println("i = " + i + "    j = " + j);
+            //System.out.println("k = " + k + "    l = " + l);
+
+            char lettre1 = this.getLetter(i, j), lettre2 = this.getLetter(k, l);
+            if((lettre1 != this.alphabet.emptyLetter || lettre2 != this.alphabet.emptyLetter) && (i != k || j != l)){
+                result.disposition[i][j] = lettre2;
+                result.disposition[k][l] = lettre1;
+                good = true;
+            }
+        }
+
+        return result;
+    }
+
 
 }
