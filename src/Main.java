@@ -4,9 +4,8 @@ import java.io.IOException;
 
 public class Main {
 
-    public static ListeDispositionClavier ldc;
-    public static Bigramme occurencesBigrammes;
-
+    private static RecuitSimule rs;
+    private static float t0;
 
     public static void main(String[] args) throws IOException {
 
@@ -14,12 +13,19 @@ public class Main {
         init();
 
         // Traitement
-
+        treatment();
     }
 
+
     public static void init() throws IOException {
+        // -> Génération du tableau de bigrammes
+        Bigramme occurencesBigrammes = new Bigramme();
+        occurencesBigrammes.parse("freqBigrammes.txt");
+
+        rs = new RecuitSimule(occurencesBigrammes);
+
         // -> Génération de 100 dispositions aléatoires de clavier
-        ldc = new ListeDispositionClavier();
+        ListeDispositionClavier ldc = new ListeDispositionClavier();
         int i = 0;
         while (i< 100) {
             DispositionClavier dc = new DispositionClavier();
@@ -28,14 +34,17 @@ public class Main {
             i++;
         }
 
-        // -> Génération du tableau de bigrammes
-        occurencesBigrammes = new Bigramme();
-        occurencesBigrammes.parse("freqBigrammes.txt");
+        // -> Calcul de T0
+        t0 = rs.computeT0(0.20F, ldc);
+    }
+
+
+    public static void treatment(){
+
+
+
 
 
 
     }
-
-
-
 }

@@ -2,6 +2,8 @@ package src;
 
 public class DispositionClavier {
 
+
+
     private final char[][] disposition;
     private final Alphabet alphabet;
 
@@ -18,7 +20,10 @@ public class DispositionClavier {
                 if(nbLetters > 0) {
                     int value = (int) Math.floor(Math.random() * (nbLetters));
                     this.disposition[i][j] = this.alphabet.getLetter(value);
+                    this.alphabet.removeLetter(value);
                     nbLetters -= 1;
+                } else {
+                    this.disposition[i][j] = this.alphabet.emptyLetter;
                 }
             }
         }
@@ -52,6 +57,10 @@ public class DispositionClavier {
         int xl1 = tab1[0]; int yl1 = tab1[1];
         int xl2 = tab2[0]; int yl2 = tab2[1];
         return Math.abs(xl1-xl2) + Math.abs(yl1 - yl2);
+    }
+
+    public char[][] getDisposition() {
+        return disposition;
     }
 
 

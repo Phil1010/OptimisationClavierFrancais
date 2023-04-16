@@ -22,4 +22,5 @@ public class ListeDispositionClavier {
     public ArrayList<DispositionClavier> getListe() {
         return this.dispositions;
     }
+
 }

@@ -18,4 +18,20 @@ class BigrammeTest {
         bigramme.printBigramme();
 
     }
+
+    @Test
+    void getOccurr() {
+        Bigramme bigramme = new Bigramme();
+        try {
+            bigramme.parse("freqBigrammes.txt");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        bigramme.printBigramme();
+
+        int occur = bigramme.getOccurr('V', 'G');
+        System.out.println("Occur of VG : " + occur);
+
+
+    }
 }

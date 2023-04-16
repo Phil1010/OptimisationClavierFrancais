@@ -37,8 +37,6 @@ public class Bigramme {
                 }
             }
         }
-
-
     }
 
     public void addOccurToMatrix(int occur) {
@@ -68,5 +66,14 @@ public class Bigramme {
                     + "----------------------------------------------------------------------------------------------"
                     + "--------------------");
         }
+    }
+
+    public int getOccurr(char lettre1, char lettre2) {
+        // Getting abscisse and ordonnee of the matrix
+        int abs = lettre1 - 65;         // Lign
+        int ord = lettre2 - 65;         // Column
+        // System.out.println("abs : " + abs + "    ord : " + ord + "   - Gives : " + this.bigrammeMatrix[abs][ord]);
+
+        return this.bigrammeMatrix[abs][ord];
     }
 }
